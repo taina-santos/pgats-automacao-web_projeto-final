@@ -28,6 +28,11 @@ class Menu{
     accessContactUsPage(){
         cy.get(menuLocators.contactButton).click();
     }
+
+    subscribeUser(email){
+        cy.get(menuLocators.subscriptionEmailField).type(email);
+        cy.get(menuLocators.subscriptionButton).click();
+    }
 }
 
 export default new Menu();

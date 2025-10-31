@@ -1,0 +1,1 @@
+export const proceedToCheckout = 'a[class="btn btn-default check_out"]';

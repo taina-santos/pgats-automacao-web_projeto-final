@@ -1,13 +1,5 @@
 import { fa, faker } from "@faker-js/faker";
 
-export function getRandomNumber(){
-    return new Date().getTime()
-}
-
-export function getNewEmail(){
-    return `novo-qa-${getRandomNumber()}@mail.com`;
-}
-
 export function newRandomUser(){
     return {
         firstName: faker.person.firstName(),
@@ -25,4 +17,14 @@ export function signUpForm(){
         name: faker.person.firstName(),
         email: faker.internet.email(),
     };
+}
+
+export function paymentInfo(){
+    return {
+        nameOnCard: faker.finance.accountName(),
+        cardNumber: faker.finance.creditCardNumber(),
+        cvvNumber: faker.finance.creditCardCVV(),
+        expMonth: '10',
+        expYear: '2050',
+    }
 }

@@ -1,4 +1,4 @@
-import faker from "@faker-js/faker";
+import { fa, faker } from "@faker-js/faker";
 
 export function getRandomNumber(){
     return new Date().getTime()

@@ -16,6 +16,10 @@ class Menu{
     accessHomePage(){
         cy.get(menuLocators.homeButton).click();
     }
+
+    accessDeleteAccount(){
+        cy.get(menuLocators.deleteAccountButton).click();
+    }
 }
 
 export default new Menu();

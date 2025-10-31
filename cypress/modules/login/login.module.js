@@ -3,7 +3,7 @@ import * as loginLocators from './login.locators';
 class Login{
     fillLoginForm(email, password){
         cy.get(loginLocators.loginEmailField).type(email);
-        cy.get(loginLocators.loginpasswordField).type(password);
+        cy.get(loginLocators.loginPasswordField).type(password);
     }
 
     clickLoginButton(){

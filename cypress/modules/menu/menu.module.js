@@ -20,6 +20,10 @@ class Menu{
     accessDeleteAccount(){
         cy.get(menuLocators.deleteAccountButton).click();
     }
+
+    accessLogout(){
+        cy.get(menuLocators.logoutButton).click();
+    }
 }
 
 export default new Menu();

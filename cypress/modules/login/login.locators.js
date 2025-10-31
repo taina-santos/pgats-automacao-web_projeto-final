@@ -4,7 +4,7 @@ export const signUpForm = '.signup-form';
 
 // Login form elements
 export const loginEmailField = 'input[data-qa="login-email"]';
-export const loginpasswordField = 'input[data-qa="login-password"]';
+export const loginPasswordField = 'input[data-qa="login-password"]';
 export const loginButton = 'button[data-qa="login-button"]';
 
 // Signup form elements

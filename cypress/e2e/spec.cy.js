@@ -1,6 +1,8 @@
-import loginModule from '../modules/login/login.module';
+import login from '../modules/login/login.module';
 import menu from '../modules/menu/menu.module';
-import signUpModule from '../modules/signUp/signUp.module';
+import singup from '../modules/signUp/signUp.module';
+import { logoutButton, signUpLoginButton } from '../modules/menu/menu.locators'
+import usuarioValido from '../fixtures/login/usuarioValido.json';
 import { accountCreatedHeader, accountDeletionHeader } from '../modules/signUp/signUp.locators';
 import { signUpForm } from '../support/helpers';
 
@@ -14,25 +16,59 @@ describe('Automation exercise', () => {
     menu.accessSignUpLoginPage();
     cy.contains('h2', 'New User Signup!').should('be.visible');
 
-    loginModule.fillSignUpForm(signUpForm().name, signUpForm().email);
-    loginModule.clickSignUpButton();
+    login.fillSignUpForm(signUpForm().name, signUpForm().email);
+    login.clickSignUpButton();
 
-    signUpModule.preencherNewUserForm();
-    signUpModule.clickCreateAccount();
+    singup.preencherNewUserForm();
+    singup.clickCreateAccount();
 
     cy.url().should('includes', 'account_created');
     cy.contains('b', 'Account Created!');
     cy.get(accountCreatedHeader).should('have.text', 'Account Created!');
-    signUpModule.completeUserAction();
+    singup.completeUserAction();
 
+    cy.get(logoutButton).should('be.visible');
     cy.contains('Logged in as ').should('be.visible');
     menu.accessDeleteAccount();
 
     cy.url().should('includes', 'delete_account');
     cy.get(accountDeletionHeader).should('have.text', 'Account Deleted!');
-    signUpModule.completeUserAction();
+    singup.completeUserAction();
+    cy.get(signUpLoginButton).should('be.visible');
   });
 
-  it('#2 - ', () => {
+  it('#2 - Login User with correct email and password', () => {
+    menu.accessSignUpLoginPage();
+    cy.contains('h2', 'Login to your account').should('be.visible');
+
+    login.fillLoginForm(usuarioValido.email, usuarioValido.senha);
+    login.clickLoginButton();
+
+    cy.contains(`Logged in as ${usuarioValido.nome}`).should('be.visible');
+    cy.get(logoutButton).should('be.visible');
+  });
+
+  it('#3 - Login User with incorrect email and password', () => {
+    menu.accessSignUpLoginPage();
+    cy.contains('h2', 'Login to your account').should('be.visible');
+
+    login.fillLoginForm(usuarioValido.email, 'qa1234');
+    login.clickLoginButton();
+
+    cy.get('.login-form > form > p').should('contain', 'Your email or password is incorrect!');
+  });
+
+  it('#4 - Logout User', () => {
+    menu.accessSignUpLoginPage();
+    cy.contains('h2', 'Login to your account').should('be.visible');
+
+    login.fillLoginForm(usuarioValido.email, usuarioValido.senha);
+    login.clickLoginButton();
+
+    cy.contains(`Logged in as ${usuarioValido.nome}`).should('be.visible');
+    cy.get(logoutButton).should('be.visible');
+
+    menu.accessLogout();
+    cy.url().should('includes', 'login');
   });
 })

@@ -5,6 +5,7 @@ import { logoutButton, signUpLoginButton } from '../modules/menu/menu.locators'
 import usuarioValido from '../fixtures/login/usuarioValido.json';
 import { accountCreatedHeader, accountDeletionHeader } from '../modules/signUp/signUp.locators';
 import { signUpForm } from '../support/helpers';
+import contact from '../modules/contactUs/contactUs.module';
 
 describe('Automation exercise', () => {
   beforeEach(() => {
@@ -70,5 +71,24 @@ describe('Automation exercise', () => {
 
     menu.accessLogout();
     cy.url().should('includes', 'login');
+  });
+
+  it('Register User with existing email', () => {
+    menu.accessSignUpLoginPage();
+    cy.contains('h2', 'New User Signup!').should('be.visible');
+
+    login.fillSignUpForm(signUpForm().name, usuarioValido.email);
+    login.clickSignUpButton();
+
+    cy.get('.signup-form > form > p').should('contain', 'Email Address already exist!');
+  });
+
+  it('#6 - Contact Us Form', () => {
+    menu.accessContactUsPage();
+    cy.contains('h2', 'Contact Us').should('be.visible');
+
+    contact.preencherContactForm();
+    cy.get('.status').should('be.visible');
+    cy.get('.status').should('have.text', 'Success! Your details have been submitted successfully.');
   });
 })

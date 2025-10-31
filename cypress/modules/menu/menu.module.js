@@ -24,6 +24,10 @@ class Menu{
     accessLogout(){
         cy.get(menuLocators.logoutButton).click();
     }
+
+    accessContactUsPage(){
+        cy.get(menuLocators.contactButton).click();
+    }
 }
 
 export default new Menu();

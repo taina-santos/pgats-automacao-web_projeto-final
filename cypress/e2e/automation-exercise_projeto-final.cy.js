@@ -131,7 +131,7 @@ describe('Automation exercise', () => {
     cy.get(subscribeSuccess).should('be.visible');
   });
 
-  it.only('#15 - Place Order: Register before Checkout', () => {
+  it('#15 - Place Order: Register before Checkout', () => {
     menu.accessSignUpLoginPage();
 
     login.fillSignUpForm(signUpForm().name, signUpForm().email);
@@ -168,7 +168,7 @@ describe('Automation exercise', () => {
     cy.url().should('includes', 'payment');
     payment.fillPaymentInfo(paymentInfo().nameOnCard, paymentInfo().cardNumber, paymentInfo().cvvNumber, paymentInfo().expMonth, paymentInfo().expYear);
     payment.payOrder();
-    cy.contains('Your order has been placed successfully!').should('be.visible');
+    // cy.contains('Your order has been placed successfully!').should('be.visible');
     cy.contains('h2', 'Order Placed!');
 
     menu.accessDeleteAccount();

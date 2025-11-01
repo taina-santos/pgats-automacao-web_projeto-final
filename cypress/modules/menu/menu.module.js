@@ -6,7 +6,7 @@ class Menu{
     }
 
     accessCartsPage(){
-        cy.get(menuLocators.cartButton).click();
+        cy.get(menuLocators.cartButton).eq(0).click();
     }
 
     accessProductsPage(){
